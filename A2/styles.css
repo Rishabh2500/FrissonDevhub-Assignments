@@ -72,9 +72,36 @@ body {
   font-size: 14px;
 }
 
-.name {
-  font-size: 12px;
-  margin-top: 4px;
+.kapil-box {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  bottom: 125px;
+  right: 275px;
+  background-color: #a0522d;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.kapil-box .initial-circle {
+  background-color: #1e1e1e;
+  color: white;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.kapil-box .kapil-name {
+  font-size: 14px;
 }
 
 .meeting-code {
@@ -88,12 +115,16 @@ body {
 .reactions {
   position: absolute;
   bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 10px;
+  z-index: 10;
 }
 
 .reactions span {
   font-size: 1.5rem;
+  left: 50%;
   cursor: pointer;
 }
 
@@ -135,15 +166,17 @@ body {
 }
 
 .sidebar {
-  position: absolute;
-  top: 0px;
+  position: fixed;
+  top: 0;
   right: 0;
   width: 250px;
-  height: calc(100vh - 150px);
+  height: 100vh;
   background-color: #fff;
   color: #000;
   padding: 15px;
   overflow-y: auto;
+  z-index: 1000;
+  transition: transform 0.3s ease;
 }
 
 .sidebar input {
@@ -214,7 +247,7 @@ body {
 }
 
 .sidebar .participants li {
-  margin: 5px 0;
+  margin: 5px;
 }
 
 .bottom-right-icons {
@@ -243,25 +276,104 @@ body {
 }
 
 /* Responsive Design */
+
 @media (max-width: 768px) {
   .sidebar {
     display: none;
   }
-  .reactions,
-  .controls {
+
+  .main {
+    padding: 10px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .reactions {
+    position: absolute;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
     flex-wrap: wrap;
     justify-content: center;
-  }
-}
-
-@media (min-width: 769px) {
-  .sidebar {
-    display: block;
+    max-width: 90%;
+    gap: 8px;
+    z-index: 5;
   }
 
-  .reactions,
-  .controls {
-    flex-wrap: nowrap;
-    justify-content: space-between;
+  .bottom-controls {
+    flex-wrap: wrap;
+    justify-content: center;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    padding: 10px;
+    gap: 8px;
+    bottom: 20px;
+  }
+
+  .kapil-box {
+    position: absolute;
+    bottom: 225px;
+    right: 10px;
+    width: auto;
+    padding: 8px 14px;
+    font-size: 12px;
+    flex-direction: row;
+    gap: 6px;
+    z-index: 4; /* reactions se neeche */
+  }
+
+  .kapil-box .initial-circle {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  .avatar img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .username {
+    font-size: 12px;
+    left: 10px;
+    bottom: 250px;
+  }
+
+  .meeting-code {
+    font-size: 12px;
+    left: 10px;
+    /* bottom: 225px; */
+  }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      transform: translateX(100%);
+    }
+
+    /* Show sidebar when checkbox is checked */
+    #sidebar-toggle:checked ~ .sidebar {
+      transform: translateX(0);
+    }
+
+    .sidebar-toggle-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 1100;
+      background-color: #000;
+      color: #fff;
+      padding: 8px 12px;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  }
+
+  /* Hide toggle button on large screens */
+  @media (min-width: 769px) {
+    .sidebar-toggle-btn {
+      display: none;
+    }
   }
 }
